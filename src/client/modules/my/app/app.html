@@ -1,0 +1,30 @@
+<template>
+
+    <lightning-layout horizontal-align="center">
+        <lightning-layout-item size="8" padding="around-small">
+            <p>This Heroku service will check to see if your Salesorce Org has the &nbsp;
+            <a target="_blank" href="https://help.salesforce.com/s/articleView?id=release-notes.rn_lc_secure_static_resources_update.htm&type=5&release=232">Enable Secure Static Resources for Lightning Components</a>
+            &nbsp;update enabled. If it <b>IS</b> enabled, it may cause issues with certain managed LWC components.</p>
+        </lightning-layout-item>
+    </lightning-layout>
+
+    <lightning-layout horizontal-align="center">
+        <lightning-layout-item size="8" padding="around-small">
+            <template if:true={isSet}>
+                <template if:true={isEnabled}>
+                    <lightning-icon icon-name="action:close" alternative-text="Error" title="Error"></lightning-icon>
+                    Please disable this update under <b>Setup -> Release Updates</b>
+                </template>  
+                <template if:false={isEnabled}>
+                    <lightning-icon icon-name="action:approval" alternative-text="Success" title="Success"></lightning-icon>
+                    No action needed at this time
+                </template>
+            </template>
+            <template if:false={isSet}>
+                <a class="slds-button slds-button_brand" href="/oauth2/auth?isSandbox=false">Production</a>
+                <a class="slds-button slds-button_outline-brand" href="/oauth2/auth?isSandbox=true">Sandbox</a>
+            </template>
+        </lightning-layout-item>
+    </lightning-layout>
+
+</template>
